@@ -3,10 +3,14 @@ workflows:
   version: 2
   test:
     jobs:
-    - test
+    - test:
+        filters:
+          tags: { only: /.*/ }
     - release:
         requires: [test]
-        filters: { branches: { only: master } }
+        filters:
+          branches: { only: master }
+          tags: { only: /.*/ }
 jobs:
   test:
     docker:
