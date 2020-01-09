@@ -1,0 +1,30 @@
+version: 2
+workflows:
+  version: 2
+  test:
+    jobs:
+    - test
+    - release:
+        requires: [test]
+        filters: { branches: { only: master } }
+jobs:
+  test:
+    docker:
+    - image: docker:stable-git
+    steps:
+    - setup_remote_docker
+    - checkout
+    - run: { command: apk add --no-cache make }
+    - run: { command: make }
+  release:
+    docker:
+    - image: quay.io/tenjin/cibi:latest
+    environment:
+      - DOCKERFILE=Dockerfile
+      - NAME=pgbouncer
+    steps:
+    - setup_remote_docker
+    - checkout
+    - run:
+        name: Deploy to quay.io
+        command: /script/quay/deploy
