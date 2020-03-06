@@ -4,12 +4,8 @@
 
 ## Proposed Changes
 
->Description here
+- Description
 
 ## Steps
-- [ ] Terraform Development applied
-- [ ] Terraform Staging applied
-- [ ] Terraform Production applied
-- [ ] Deployed and tested in Staging
-- [ ] Deployed to Production
+
 - [ ] Branch removed
